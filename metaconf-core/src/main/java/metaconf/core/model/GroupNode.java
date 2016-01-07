@@ -8,14 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 import lombok.Data;
 
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name ="group")
-@XmlSeeAlso(Node.class)
 public class GroupNode implements Node {
 	private String name;
 

@@ -1,0 +1,5 @@
+language: java
+before_script: cd metaconf-core
+branches:
+  only:
+    - model
