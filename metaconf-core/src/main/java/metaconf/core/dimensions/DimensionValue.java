@@ -6,19 +6,32 @@ import javax.xml.bind.annotation.XmlType;
 
 import lombok.Builder;
 import lombok.Data;
+import metaconf.core.dimensions.dao.DAOFactory;
 
 @Data
-@Builder
 @XmlRootElement
-@XmlType(factoryMethod="createDimensionValue")
-public class DimensionValue implements Comparable<DimensionValue>{
+@XmlType(factoryMethod = "createDimensionValue")
+public class DimensionValue implements Comparable<DimensionValue> {
 	private String name;
 	private String value;
 	@XmlTransient
 	private Dimension dimension;
-	
+
 	public static DimensionValue createDimensionValue() {
-		return new DimensionValue("","", Dimension.createDimension());
+		return build("", "");
+	}
+
+	@Builder
+	private static DimensionValue build(String name, String value) {
+		DimensionValue dimensionValue = new DimensionValue();
+		dimensionValue.setName(name);
+		dimensionValue.setValue(value);
+		return dimensionValue;
+	}
+	
+	
+	public void setName(String name) {
+		dimension = DAOFactory.getDimensionManager().getByName(name);
 	}
 
 	@Override

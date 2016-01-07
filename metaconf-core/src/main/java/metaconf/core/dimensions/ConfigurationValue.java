@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Data;
 import lombok.Singular;
-import metaconf.core.dimensions.dao.DimensionManager;
+import metaconf.core.dimensions.dao.DAOFactory;
 
 @Data
 @XmlRootElement
@@ -17,8 +17,8 @@ public class ConfigurationValue {
 	private Object value;
 	
 	public ConfigurationValue() {
-		new DimensionManager().getAllDimensions().forEach(d -> {
-			dimensions.add(DimensionValue.builder().dimension(d).value(null).build());
+		DAOFactory.getDimensionManager().getAllDimensions().forEach(d -> {
+			dimensions.add(DimensionValue.builder().name(d.getName()).value(null).build());
 		});
 	}
 	

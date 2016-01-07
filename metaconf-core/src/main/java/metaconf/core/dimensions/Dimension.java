@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 @Builder
 @XmlRootElement
-@XmlType(factoryMethod="createDimension")
+@XmlType(factoryMethod = "createDimension")
 public class Dimension implements Comparable<Dimension> {
 	private int priority;
 	private String name;
-	
+
 	@Override
 	public int compareTo(Dimension o) {
 		if (o == null) {
@@ -21,8 +21,8 @@ public class Dimension implements Comparable<Dimension> {
 		}
 		return priority - o.priority;
 	}
-	
+
 	public static Dimension createDimension() {
-		return new Dimension(0,"");
+		return new Dimension(0, "");
 	}
 }

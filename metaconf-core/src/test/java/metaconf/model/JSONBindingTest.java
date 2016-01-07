@@ -63,14 +63,13 @@ public class JSONBindingTest {
     
     @Test
     public void dimension() throws JAXBException {
-    	Dimension dim = Dimension.builder().priority(1).name("dim1").build();
+    	Dimension dim = Dimension.builder().priority(1).name("dimension_1").build();
     	verifyMarshalling(dim);
     }
 
     @Test
     public void dimensionValue() throws JAXBException {
-    	Dimension dim = Dimension.builder().priority(1).name("dim1").build();
-    	DimensionValue dimValue = DimensionValue.builder().dimension(dim).value("value").build();
+    	DimensionValue dimValue = DimensionValue.builder().name("dimension_1").value("value").build();
     	verifyMarshalling(dimValue);
     }
     
