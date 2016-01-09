@@ -17,8 +17,8 @@ import lombok.Data;
 public class GroupNode implements Node {
 	private String name;
 
-	
-	@XmlElementRefs({ @XmlElementRef(name = "group", type = GroupNode.class),
-			@XmlElementRef(name = "data", type = DataNode.class) })
+	@XmlElementRefs({ 
+		@XmlElementRef(name = "group", type = GroupNode.class),
+		@XmlElementRef(name = "data", type = DataNode.class) })
 	private List<Node> children = new ArrayList<>();
 }

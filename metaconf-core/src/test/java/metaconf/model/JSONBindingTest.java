@@ -11,12 +11,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import metaconf.core.dimensions.ConfigurationValue;
-import metaconf.core.dimensions.Dimension;
-import metaconf.core.dimensions.DimensionValue;
+import metaconf.core.configuration.BooleanConfigurationValue;
+import metaconf.core.configuration.ConfigurationValue;
+import metaconf.core.configuration.IntegerConfigurationValue;
+import metaconf.core.configuration.StringConfigurationValue;
 import metaconf.core.model.DataNode;
 import metaconf.core.model.GroupNode;
 import metaconf.core.model.ValueType;
+import metaconf.core.scope.Scope;
+import metaconf.core.scope.ScopeType;
+import metaconf.core.scope.ScopedValue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +34,9 @@ public class JSONBindingTest {
     @Before
     public void init() throws JAXBException {
         this.jaxbContext = JAXBContext.newInstance(DataNode.class, 
-        		GroupNode.class, Dimension.class, DimensionValue.class, ConfigurationValue.class);
+        		GroupNode.class, ScopeType.class, Scope.class, ScopedValue.class,
+        		IntegerConfigurationValue.class, StringConfigurationValue.class,
+        		BooleanConfigurationValue.class);
         this.marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty("eclipselink.media-type", "application/json");
         this.unmarshaller = jaxbContext.createUnmarshaller();
@@ -41,7 +47,7 @@ public class JSONBindingTest {
     public void dataNode() throws JAXBException {
         DataNode node = new DataNode();
         node.setName("DataNode");
-        node.setType(ValueType.DECIMAL);      
+        node.setType(ValueType.INTEGER);      
         verifyMarshalling(node);
     }
     
@@ -63,21 +69,49 @@ public class JSONBindingTest {
     
     @Test
     public void dimension() throws JAXBException {
-    	Dimension dim = Dimension.builder().priority(1).name("dimension_1").build();
-    	verifyMarshalling(dim);
+    	ScopeType scopeType = ScopeType.builder().priority(1).name("dimension_1").build();
+    	verifyMarshalling(scopeType);
     }
 
     @Test
     public void dimensionValue() throws JAXBException {
-    	DimensionValue dimValue = DimensionValue.builder().name("dimension_1").value("value").build();
-    	verifyMarshalling(dimValue);
+    	Scope scope = Scope.builder().name("dimension_1").value("value").build();
+    	verifyMarshalling(scope);
     }
     
     @Test
     public void configurationValueEmpty() throws JAXBException {
-    	ConfigurationValue confValue = new ConfigurationValue();
+    	ScopedValue confValue = new ScopedValue();
     	verifyMarshalling(confValue);
     }
+
+    @Test
+    public void configurationValueString() throws JAXBException {
+    	ScopedValue confValue = createScopedValue();
+    	confValue.setValue(ConfigurationValue.newStringValue("str_val"));
+    	verifyMarshalling(confValue);
+    }
+    
+    @Test
+    public void configurationValueBoolean() throws JAXBException {
+    	ScopedValue confValue = createScopedValue();
+    	confValue.setValue(ConfigurationValue.newBooleanValue(true));
+    	verifyMarshalling(confValue);
+    }
+    
+    @Test
+    public void configurationValueInteger() throws JAXBException {
+    	ScopedValue confValue = createScopedValue();
+    	confValue.setValue(ConfigurationValue.newIntegerValue(123456));
+    	verifyMarshalling(confValue);
+    }
+
+	private ScopedValue createScopedValue() {
+		ScopedValue confValue = new ScopedValue();
+    	confValue.setScopeValue("dimension_1", "dvalue1");
+    	confValue.setScopeValue("dimension_2", "dvalue2");
+		return confValue;
+	}
     
 	private DataNode createDataNode(String name, ValueType type) {
 		DataNode node1 = new DataNode();
@@ -92,7 +126,6 @@ public class JSONBindingTest {
         this.marshaller.marshal(node, baos);
 
         byte[] content = baos.toByteArray();
-        System.out.println(node);
         System.out.println(new String(content));
 
         ByteArrayInputStream bais = new ByteArrayInputStream(content);

@@ -8,23 +8,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import metaconf.core.dimensions.Dimension;
+import metaconf.core.scope.ScopeType;
 
 import org.junit.Test;
 
 
 public class CategoryTest {
 
-	private Dimension catP1 = Dimension.builder()
+	private ScopeType catP1 = ScopeType.builder()
 			.priority(1).name("prio1").build();
-	private Dimension catP2 = Dimension.builder()
+	private ScopeType catP2 = ScopeType.builder()
 			.priority(2).name("prio2").build();
-	private Dimension catP3 = Dimension.builder()
+	private ScopeType catP3 = ScopeType.builder()
 			.priority(3).name("prio3").build();
 	
 	@Test
 	public void testPriority() {
-		List<Dimension> cats = new ArrayList<>();
+		List<ScopeType> cats = new ArrayList<>();
 		cats.add(catP3);
 		cats.add(catP2);
 		cats.add(catP1);
