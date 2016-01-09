@@ -11,16 +11,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import metaconf.core.configuration.BooleanConfigurationValue;
-import metaconf.core.configuration.ConfigurationValue;
-import metaconf.core.configuration.IntegerConfigurationValue;
-import metaconf.core.configuration.StringConfigurationValue;
 import metaconf.core.model.DataNode;
 import metaconf.core.model.GroupNode;
 import metaconf.core.model.ValueType;
 import metaconf.core.scope.Scope;
 import metaconf.core.scope.ScopeType;
 import metaconf.core.scope.ScopedValue;
+import metaconf.core.values.BooleanConfigurationValue;
+import metaconf.core.values.ConfigurationValue;
+import metaconf.core.values.IntegerConfigurationValue;
+import metaconf.core.values.StringConfigurationValue;
 
 import org.junit.Before;
 import org.junit.Test;

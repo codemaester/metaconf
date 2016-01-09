@@ -6,6 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Represents a scope type or scope dimension. This can be later used to distinguish 
+ * configuration values for different contexts.
+ * @author fkunz
+ *
+ */
 @Data
 @Builder
 @XmlRootElement

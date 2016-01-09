@@ -1,4 +1,4 @@
-package metaconf.core.dimensions.dao;
+package metaconf.core.dao;
 
 public class DAOFactory {
 

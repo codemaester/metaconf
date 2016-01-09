@@ -9,11 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Data;
 import lombok.Singular;
-import metaconf.core.configuration.BooleanConfigurationValue;
-import metaconf.core.configuration.ConfigurationValue;
-import metaconf.core.configuration.IntegerConfigurationValue;
-import metaconf.core.configuration.StringConfigurationValue;
-import metaconf.core.dimensions.dao.DAOFactory;
+import metaconf.core.configuration.Context;
+import metaconf.core.dao.DAOFactory;
+import metaconf.core.values.BooleanConfigurationValue;
+import metaconf.core.values.ConfigurationValue;
+import metaconf.core.values.IntegerConfigurationValue;
+import metaconf.core.values.StringConfigurationValue;
 
 @Data
 @XmlRootElement
@@ -40,5 +41,7 @@ public class ScopedValue {
 		});
 	}
 	
-	
+	public long calclulateMatchScore(Context context) {
+		return 1;
+	}
 }

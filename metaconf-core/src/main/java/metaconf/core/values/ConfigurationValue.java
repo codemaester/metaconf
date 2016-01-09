@@ -1,4 +1,4 @@
-package metaconf.core.configuration;
+package metaconf.core.values;
 
 public abstract class ConfigurationValue {
 	public abstract Object getValue();

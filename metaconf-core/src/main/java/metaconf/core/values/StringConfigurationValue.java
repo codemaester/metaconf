@@ -1,4 +1,4 @@
-package metaconf.core.configuration;
+package metaconf.core.values;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

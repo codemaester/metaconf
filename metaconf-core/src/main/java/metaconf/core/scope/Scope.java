@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import metaconf.core.dimensions.dao.DAOFactory;
+import metaconf.core.dao.DAOFactory;
 
 @EqualsAndHashCode
 @ToString
