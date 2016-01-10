@@ -2,13 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>metaconf</groupId>
-	<artifactId>metaconf-core</artifactId>
+	<artifactId>metaconf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<parent>
-		<groupId>metaconf</groupId>
-		<artifactId>metaconf</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+	<packaging>pom</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,12 +21,6 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.6</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.moxy</artifactId>
-			<version>2.6.0</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -53,4 +43,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<modules>
+    	<module>metaconf-core</module>
+  	</modules>
 </project>
