@@ -16,6 +16,7 @@ import lombok.ToString;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name ="data")
 public class DataNode implements Node {
+	private Long id;
 	private String name;
 	private ValueType type;
 }

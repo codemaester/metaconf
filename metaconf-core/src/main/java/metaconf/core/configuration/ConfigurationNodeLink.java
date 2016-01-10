@@ -14,10 +14,10 @@ import metaconf.core.values.ConfigurationValue;
 
 @XmlRootElement
 @Data
-public class ConfigurationOptions {
+public class ConfigurationNodeLink {
 	@XmlTransient
 	private DataNode dataNode;
-	private String nodeName;
+	private Long nodeId;
 	private List<ScopedValue> scopedValues;
 	
 	public ConfigurationValue getForContext(Context context) {

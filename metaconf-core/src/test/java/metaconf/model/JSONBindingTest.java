@@ -5,12 +5,16 @@ import static org.junit.Assert.assertNotSame;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import metaconf.core.configuration.Configuration;
+import metaconf.core.configuration.ConfigurationNodeLink;
+import metaconf.core.configuration.Context;
 import metaconf.core.model.DataNode;
 import metaconf.core.model.GroupNode;
 import metaconf.core.model.ValueType;
@@ -36,7 +40,8 @@ public class JSONBindingTest {
         this.jaxbContext = JAXBContext.newInstance(DataNode.class, 
         		GroupNode.class, ScopeType.class, Scope.class, ScopedValue.class,
         		IntegerConfigurationValue.class, StringConfigurationValue.class,
-        		BooleanConfigurationValue.class);
+        		BooleanConfigurationValue.class, Context.class, 
+        		ConfigurationNodeLink.class, Configuration.class);
         this.marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty("eclipselink.media-type", "application/json");
         this.unmarshaller = jaxbContext.createUnmarshaller();
@@ -68,19 +73,19 @@ public class JSONBindingTest {
     }
     
     @Test
-    public void dimension() throws JAXBException {
+    public void scopeType() throws JAXBException {
     	ScopeType scopeType = ScopeType.builder().priority(1).name("dimension_1").build();
     	verifyMarshalling(scopeType);
     }
 
     @Test
-    public void dimensionValue() throws JAXBException {
+    public void scope() throws JAXBException {
     	Scope scope = Scope.builder().name("dimension_1").value("value").build();
     	verifyMarshalling(scope);
     }
     
     @Test
-    public void configurationValueEmpty() throws JAXBException {
+    public void scopedValue() throws JAXBException {
     	ScopedValue confValue = new ScopedValue();
     	verifyMarshalling(confValue);
     }
@@ -105,7 +110,36 @@ public class JSONBindingTest {
     	confValue.setValue(ConfigurationValue.newIntegerValue(123456));
     	verifyMarshalling(confValue);
     }
+    
+    @Test
+    public void context() throws JAXBException {
+    	Context context = new Context();
+    	context.setScopeValue("dimension_1", "dvalue1");
+    	verifyMarshalling(context);
+    }
 
+    @Test
+    public void configurationNodeLink() throws JAXBException {
+    	ConfigurationNodeLink configLink = new ConfigurationNodeLink();
+    	configLink.setNodeId(1234L);
+    	ScopedValue confValue = createScopedValue();
+    	confValue.setValue(ConfigurationValue.newIntegerValue(123456));
+    	configLink.setScopedValues(Arrays.asList(confValue));
+    	verifyMarshalling(configLink);
+    }
+    
+    @Test
+    public void configuration() throws JAXBException {
+    	ConfigurationNodeLink configLink = new ConfigurationNodeLink();
+    	configLink.setNodeId(1234L);
+    	ScopedValue confValue = createScopedValue();
+    	confValue.setValue(ConfigurationValue.newIntegerValue(123456));
+    	configLink.setScopedValues(Arrays.asList(confValue));
+    	Configuration config = new Configuration();
+    	config.getConfigurationValues().add(configLink);
+    	verifyMarshalling(config);
+    }
+    
 	private ScopedValue createScopedValue() {
 		ScopedValue confValue = new ScopedValue();
     	confValue.setScopeValue("dimension_1", "dvalue1");

@@ -16,3 +16,4 @@ RemoteSystemsTempFiles
 .project
 metaconf-core/.settings
 metaconf-core/target
+.settings

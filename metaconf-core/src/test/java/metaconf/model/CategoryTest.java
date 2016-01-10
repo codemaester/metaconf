@@ -2,7 +2,6 @@ package metaconf.model;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,18 +29,18 @@ public class CategoryTest {
 		cats.add(catP1);
 		Collections.sort(cats);
 		
-		assertThat(cats.get(0), equalTo(catP1));
+		assertThat(cats.get(2), equalTo(catP1));
 		assertThat(cats.get(1), equalTo(catP2));
-		assertThat(cats.get(2), equalTo(catP3));
+		assertThat(cats.get(0), equalTo(catP3));
 	}
 	
 	@Test
 	public void testBuildPrio() {
-		assertThat(catP1.getPriority(), is(1));
+		assertThat(catP1.getPriority(), equalTo(1));
 	}
 	
 	@Test
 	public void testBuildName() {
-		assertThat(catP1.getName(), is("prio1"));
+		assertThat(catP1.getName(), equalTo("prio1"));
 	}
 }

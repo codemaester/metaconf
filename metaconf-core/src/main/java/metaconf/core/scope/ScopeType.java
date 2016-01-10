@@ -25,7 +25,7 @@ public class ScopeType implements Comparable<ScopeType> {
 		if (o == null) {
 			return -1;
 		}
-		return priority - o.priority;
+		return o.priority - priority;
 	}
 
 	public static ScopeType createScopeType() {
